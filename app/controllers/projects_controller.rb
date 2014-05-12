@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  load_and_authorize_resource param_method: :project_params
+
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # GET /projects

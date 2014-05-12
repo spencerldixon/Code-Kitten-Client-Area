@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :projects
+  has_many :invoices, through: :projects
+
 
   validates :first_name, :last_name, :business_name, presence: true
 end

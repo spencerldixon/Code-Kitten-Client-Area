@@ -28,6 +28,7 @@ gem 'spring',        group: :development
 
 gem 'devise', '~> 3.2.4'
 gem 'cancancan', '~> 1.8.0'
+gem 'simple_form', '~> 3.0.2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

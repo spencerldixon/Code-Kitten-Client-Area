@@ -1,0 +1,19 @@
+<%= simple_form_for(@invoice, html: {class: 'form-horizontal' }) do |f| %>
+  <% if @invoice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+
+      <ul>
+      <% @invoice.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.input :amount, label: "Amount" %>
+  <%= f.input :note, label: "Note" %>
+  <%= f.input :paid, label: "Paid" %>
+  <%= f.association :project, label_method: :name %>
+  <%= f.button :submit %>
+<% end %>

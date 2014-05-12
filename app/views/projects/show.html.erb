@@ -10,5 +10,8 @@
   <%= @project.completed %>
 </p>
 
+<% if can? :manage, Project %>
 <%= link_to 'Edit', edit_project_path(@project) %> |
+<% end %>
+
 <%= link_to 'Back', projects_path %>

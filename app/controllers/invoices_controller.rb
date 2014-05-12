@@ -1,10 +1,12 @@
 class InvoicesController < ApplicationController
+  load_and_authorize_resource param_method: :invoice_params
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.all
+    @active_invoices = Invoice.where(paid: false)
+    @paid_invoices = Invoice.where(paid: true)
   end
 
   # GET /invoices/1
@@ -69,6 +71,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:amount, :note, :paid, :project_id)
+      params.require(:invoice).permit(:amount, :note, :project_id)
     end
 end

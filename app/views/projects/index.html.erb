@@ -1,14 +1,12 @@
-<div class="page-header">
-  <h1>Listing My Projects</h1>
-</div>
-
-
 <% if !@invoices.blank? %>
   <div class="well">
-    <h3>You have <%= @invoices.count %> unpaid <%= "invoice".pluralize(@invoices.count) %>. Click <%= link_to "here", invoices_path %> to check it out</h3>
+    <h3>You have <%= @invoices.count %> unpaid <%= "invoice".pluralize(@invoices.count) %>. Click <%= link_to "here", invoices_path %> to action</h3>
   </div>
 <% end %>
 
+<div class="page-header">
+  <h1>My Active Projects</h1>
+</div>
 
 <table class="table">
   <thead>
@@ -32,11 +30,11 @@
 
         <td><%= project.name %></td>
         <td><%= project.completed %></td>
-        <td><%= link_to 'Show', project %></td>
+        <td><%= button_to 'Show', project, method: :get, class: "btn btn-primary" %></td>
         
         <% if can? :manage, Project %>
-          <td><%= link_to 'Edit', edit_project_path(project) %></td>
-          <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= button_to 'Edit', edit_project_path(project), method: :get, class: "btn btn-primary" %></td>
+          <td><%= button_to 'Destroy', project, method: :delete, class: "btn btn-primary", data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>

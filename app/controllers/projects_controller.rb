@@ -6,12 +6,12 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
+    @invoices = current_user.invoices.where(paid: false)
+
     if current_user.admin?
       @projects = Project.all
-      @invoices = nil
     else
       @projects = current_user.projects
-      @invoices = current_user.invoices.where(paid: false)
     end
   end
 

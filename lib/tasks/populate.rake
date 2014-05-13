@@ -1,41 +1,63 @@
 task :populate => :environment do
-	if Rails.env.production?
-		puts "Cannot run this task in the production environment"
+	if Rails.env.development?
+		purge
+		create_admin
+		create_users
+		create_projects
+		create_invoices
+		puts "Database populated successfully!"
 	else
-		User.delete_all
-		Project.delete_all
-
-		john = User.create!(
-			first_name: "John",
-			last_name: "Johnson",
-			business_name: "TestCo Ltd",
-			email: "user1@test.com", 
-			password: "test1234",
-			password_confirmation: "test1234"
-		)
-
-		carl = User.create!(
-			first_name: "Carl",
-			last_name: "Carlson",
-			business_name: "Carlson Enterprises",
-			email: "user2@test.com", 
-			password: "test1234",
-			password_confirmation: "test1234"
-		)
-
-		admin = User.create!(
-			first_name: "Dave",
-			last_name: "Davidson",
-			business_name: "Code Kitten",
-			email: "admin@test.com",
-			password: "test1234",
-			password_confirmation: "test1234",
-			admin: true
-		)
-
-		Project.create!(name: "Carlson Enterprises Website", user: carl)
-		Project.create!(name: "John's Website", user: john)
-
-		puts "Users and Projects created successfully!"
+		puts "Cannot run this task in the test or production environments!"
 	end
+end
+
+def purge
+	Rake::Task['db:reset'].invoke
+	puts "Database reset successfully"
+end
+
+def create_admin
+	User.create!(
+		first_name: "Admin",
+		last_name: "Adminson",
+		business_name: "Code Kitten",
+		email: "admin@test.com",
+		password: "test1234",
+		password_confirmation: "test1234",
+		admin: true
+	)
+	puts "Admin user created"
+end
+
+def create_users
+	5.times do |n|
+		email = "user#{n+1}@test.com"
+		password = "test1234"
+		first_name = Faker::Name.first_name
+		last_name = Faker::Name.last_name
+		business_name = Faker::Company.name
+
+
+		User.create!(
+			first_name: first_name,
+			last_name: last_name,
+			business_name: business_name,
+			email: email,
+			password: password,
+			password_confirmation: password
+		)
+	end
+	puts "5 Client users created"
+end
+
+def create_projects
+	users = User.all
+	users.each { |user| user.projects.create!(name: "#{Faker::Company.name} Website" ) }
+	puts "Project created for each user"
+end
+
+def create_invoices
+	projects = Project.all
+	projects.each { |project| project.invoices.create!(amount: Faker::Number.number(3), note: "Invoice for #{project.name}") }
+	puts "Invoice created for each project"
 end

@@ -63,6 +63,26 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def pay
+    invoice = Invoice.find(params[:id])
+    token = params[:stripeToken]
+
+    begin
+      charge = Stripe::Charge.create(
+        amount:   (invoice.amount * 100).to_i,
+        currency: "gbp",
+        card:     token,
+        description: invoice.project.name
+      )
+
+      invoice.update_attributes(paid: true, paid_at: DateTime.now) # Mark our invoice as paid
+
+      redirect_to invoices_path, success: "Your payment was received successfully!"
+    rescue Stripe::CardError => e
+      render :index, error: e.message
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_invoice

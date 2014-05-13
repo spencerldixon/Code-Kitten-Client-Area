@@ -22,7 +22,18 @@
           <td><%= invoice.note %></td>
           <td>£<%= invoice.amount %></td>
           <td><%= invoice.paid %></td>
-          <td><%= button_to 'Pay Invoice', root_path, method: :get, class: "btn btn-primary" %></td>
+          <td><%= form_tag pay_invoice_path(invoice) do %>
+                <script src="https://checkout.stripe.com/v2/checkout.js"
+                  class="stripe-button"
+                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                  data-description="<%= invoice.note %>"
+                  data-amount="<%= invoice.amount * 100 %>"
+                  data-currency="gbp">
+                </script>
+              <% end %>
+          </td>
+
+
 
           <% if can? :manage, Invoice %>
             <td><%= button_to 'Edit', edit_invoice_path(invoice), method: :get, class: "btn btn-primary" %></td>

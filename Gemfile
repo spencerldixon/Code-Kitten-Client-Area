@@ -30,6 +30,7 @@ gem 'devise', '~> 3.2.4'
 gem 'cancancan', '~> 1.8.0'
 gem 'simple_form', '~> 3.0.2'
 gem 'faker', '~> 1.3.0'
+gem 'stripe', '~> 1.11.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -31,6 +31,11 @@ gem 'cancancan', '~> 1.8.0'
 gem 'simple_form', '~> 3.0.2'
 gem 'faker', '~> 1.3.0'
 gem 'stripe', '~> 1.11.0'
+gem 'brakeman'
+
+group :development do
+	gem 'rails-erd', '~> 1.1.0'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -76,7 +76,6 @@ class InvoicesController < ApplicationController
       )
 
       invoice.update_attributes(paid: true, paid_at: DateTime.now) # Mark our invoice as paid
-
       redirect_to invoices_path, success: "Your payment was received successfully!"
     rescue Stripe::CardError => e
       render :index, error: e.message

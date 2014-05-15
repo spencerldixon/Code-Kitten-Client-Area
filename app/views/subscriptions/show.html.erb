@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Stripe customer token:</strong>
+  <%= @subscription.stripe_customer_token %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @subscription.state %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @subscription.user %>
+</p>
+
+<p>
+  <strong>Stripe plan:</strong>
+  <%= @subscription.stripe_plan_id %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @subscription.amount %>
+</p>
+
+<p>
+  <strong>Period:</strong>
+  <%= @subscription.period %>
+</p>
+
+<%= link_to 'Edit', edit_subscription_path(@subscription) %> |
+<%= link_to 'Back', subscriptions_path %>

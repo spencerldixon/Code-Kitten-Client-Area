@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :projects
   has_many :invoices, through: :projects
-
+  has_many :subscriptions, dependent: :destroy
 
   validates :first_name, :last_name, :business_name, presence: true
 end

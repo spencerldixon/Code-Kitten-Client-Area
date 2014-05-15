@@ -1,28 +1,22 @@
-== README
+== Code Kitten Client Area
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+An application for a web design company to manage clients and projects, for clients to log in and see how their project is progressing, and for admins to raise invoices and subscriptions for deposits and monthly hosting respectively.
+
+I blogged a 10 part tutorial on the creation of this app. I have purposefully left out some things with the intention of creating a whole app and walking through it with blog posts in a matter of a few days. I will be taking this app on in the future and making it production grade in my spare time.
+
 
 Things you may want to cover:
 
-* Ruby version
+* Stripe
+* Devise 
+* CanCan
+* Brakeman
+* PostgreSQL 
+* Rails ERD
+* Faker
 
-* System dependencies
+Tasks:
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* rake erd - Generates an Entity Relationship Diagram in the root of the app
+* rake brakeman - Runs brakeman security scanner
+* rake populate - Clears database and populates it with sample data (Development environment only)

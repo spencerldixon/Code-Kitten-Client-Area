@@ -5,8 +5,14 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-    @active_invoices = Invoice.where(paid: false)
-    @paid_invoices = Invoice.where(paid: true)
+    if current_user.admin?
+      @active_invoices = Invoice.where(paid: false)
+      @paid_invoices = Invoice.where(paid: true)
+    else
+      invoices = current_user.invoices
+      @active_invoices = invoices.where(paid: false)
+      @paid_invoices = invoices.where(paid: true)
+    end
   end
 
   # GET /invoices/1
